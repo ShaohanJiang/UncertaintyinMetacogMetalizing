@@ -5,43 +5,23 @@ taskcolor = [0 0 1; 1 0 0; 1 0 1; 0 1 0; 0 1 1];
 
 %% fig5a ctime_bin
 figure;
-neauc_bins = all_res{2}.ctime_bin;
+% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+for ii = 2:5
+neauc_bins = all_res{ii}.ctime_bin;
 nsub = size(neauc_bins,1);
 mbins = mean(neauc_bins);
 sembins = std(neauc_bins)/sqrt(nsub);
 hold on;
-e = errorbar(mbins, sembins, 'o-','LineWidth',2.5,'MarkerFaceColor','white','MarkerEdgeColor','black');
-e.Color = 'red';
+e = errorbar(mbins, sembins, 'o-','LineWidth',1,'MarkerSize',3,'MarkerFaceColor','white','MarkerEdgeColor',taskcolor(ii,:),'CapSize',2);
+e.Color = taskcolor(ii,:);
+end
 
-neauc_bins = all_res{3}.ctime_bin;
-nsub = size(neauc_bins,1);
-mbins = mean(neauc_bins);
-sembins = std(neauc_bins)/sqrt(nsub);
-hold on;
-e = errorbar(mbins, sembins, 'o-','LineWidth',2.5,'MarkerFaceColor','white','MarkerEdgeColor','black');
-e.Color = 'magenta';
-
-neauc_bins = all_res{4}.ctime_bin;
-nsub = size(neauc_bins,1);
-mbins = mean(neauc_bins);
-sembins = std(neauc_bins)/sqrt(nsub);
-hold on;
-e = errorbar(mbins, sembins, 'o-','LineWidth',2.5,'MarkerFaceColor','white','MarkerEdgeColor','black');
-e.Color = 'green';
-
-neauc_bins = all_res{5}.ctime_bin;
-nsub = size(neauc_bins,1);
-mbins = mean(neauc_bins);
-sembins = std(neauc_bins)/sqrt(nsub);
-hold on;
-e = errorbar(mbins, sembins, 'o-','LineWidth',2.5,'MarkerFaceColor','white','MarkerEdgeColor','black');
-e.Color = [0 1 1];
-
-set(gca,'XTick',1:4, 'YTick',0.5:0.1:1, 'LineWidth',2.5)
+set(gca,'XTick',1:4, 'YTick',0.5:0.1:1, 'LineWidth',1)
 box off
-xlim([0.5,4.5])
+xlim([0.75,4.25])
 ylim([0.5,1])
-title('ctime binned by uncertainty')
+% title('ctime binned by uncertainty')
+set(gca, 'XTickLabel', {}, 'YTickLabel',{});
 
 %% fig 5b ctime_binbyfituncer_mean
 
@@ -261,3 +241,44 @@ for jj = 1:length(all_res)
     fprintf('-------------\n')
 %     ylim([-50,30])
 end
+
+%% PLOT binned absuncer (revise)
+% all_res = {res_rdm_dacc, res_oc_dacc, res_sc_dacc, res_oa_dacc, res_sa_dacc};
+taskcolor = [0 0 1; 1 0 0; 1 0 1; 0 1 0; 0 1 1];
+
+figure;
+% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+for ii = 2:5
+neauc_bins = all_res{ii}.absuncer_bin;
+nsub = size(neauc_bins,1);
+mbins = mean(neauc_bins);
+sembins = std(neauc_bins)/sqrt(nsub);
+hold on;
+e = errorbar(mbins, sembins, 'o-','LineWidth',1,'MarkerSize',3,'MarkerFaceColor','white','MarkerEdgeColor',taskcolor(ii,:),'CapSize',2);
+e.Color = taskcolor(ii,:);
+end
+
+set(gca,'XTick',1:4, 'YTick',-2:1:0, 'LineWidth',1)
+box off
+xlim([0.75,4.25])
+ylim([-2,0])
+% title('absuncer binned by uncertainty')
+
+figure;
+% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+for ii = 1:length(all_res)
+    thisres = all_res{ii};
+    neauc_bins = thisres.absuncer_binbyfituncer_mean;
+    [nsub, nbin] = size(neauc_bins);
+    mbins = mean(neauc_bins);
+    sembins = std(neauc_bins)/sqrt(nsub);
+    e = errorbar(mbins, sembins, 'o-','LineWidth',1,'MarkerSize',3,'MarkerFaceColor','white','MarkerEdgeColor',taskcolor(ii,:),'CapSize',2);
+    e.Color = taskcolor(ii,:);
+    hold on
+end
+hold off
+
+set(gca,'XTick',1:nbin, 'YTick',-2:1:0, 'LineWidth',1)
+box off
+xlim([0.5,nbin+0.5])
+ylim([-2, -0])
