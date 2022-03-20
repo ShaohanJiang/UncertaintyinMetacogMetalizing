@@ -5,8 +5,8 @@ taskcolor = [0 0 1; 1 0 0; 1 0 1; 0 1 0; 0 1 1];
 
 %% fig5a ctime_bin
 figure;
-% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
-for ii = 2:5
+set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+for ii = 1:5
 neauc_bins = all_res{ii}.ctime_bin;
 nsub = size(neauc_bins,1);
 mbins = mean(neauc_bins);
@@ -26,7 +26,7 @@ set(gca, 'XTickLabel', {}, 'YTickLabel',{});
 %% fig 5b ctime_binbyfituncer_mean
 
 figure;
-% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
 for ii = 1:length(all_res)
     thisres = all_res{ii};
     neauc_bins = thisres.ctime_binbyfituncer_mean;
@@ -46,8 +46,8 @@ ylim([0.5, 1])
 
 %% PLOT binned absuncer (revise) fig 5c
 figure;
-% set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
-for ii = 2:5
+set(gcf,'unit','centimeters','position',[3 5 4.52 3.45])
+for ii = 1:5
 neauc_bins = all_res{ii}.absuncer_bin;
 nsub = size(neauc_bins,1);
 mbins = mean(neauc_bins);
@@ -61,6 +61,7 @@ set(gca,'XTick',1:4, 'YTick',-2:1:0, 'LineWidth',1)
 box off
 xlim([0.75,4.25])
 ylim([-2,0])
+set(gca, 'XTickLabel', {}, 'YTickLabel',{});
 % title('absuncer binned by uncertainty')
 
 %% PLOT binned absuncer (revise) fig 5d
@@ -234,7 +235,7 @@ box off
 xlim([0.5,nbin+0.5])
 ylim([-50, 25])
 
-%% бшнд fig 5l beta_roibetarm_absresiduncer
+%% fig 5l beta_roibetarm_absresiduncer
 
 for jj = 1:length(all_res)
     thisr{jj} = all_res{jj}.beta_roibetarm_absresiduncer;
