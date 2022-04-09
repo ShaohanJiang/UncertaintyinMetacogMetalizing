@@ -1,0 +1,2 @@
+change work path to current folder
+run figS6_betavalues_difficulty_RT_uncertaintyresiduals_in_ROIs.m in Matlab
